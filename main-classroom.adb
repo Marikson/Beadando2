@@ -18,6 +18,7 @@ Protected body Classroom is
             if Attendees(I).Name = N and Attendees(I).Loc = Lecture then 
                 Attendees(I).Loc:= Home;
                 DS := new Door_Slam;
+                Printer.Put_Line("( " & N & " )"  & " elhagyta a termet!");
             end if;
         end loop;
     end Leave;
@@ -25,9 +26,9 @@ Protected body Classroom is
     procedure Check_Random is 
         Num: Positive;
     begin 
-        
         Num:= Safe_Random.GetRandStudent mod InRoom +1;
-        if Attendees(Num).Loc = Home then 
+        if Attendees(Num).Loc = Home then
+            Printer.Put_Line("Szuroporba aldozatat lehuzta a tanar a listarol!");
             Attendees(Num):= Attendees(InRoom);
             InRoom:= InRoom-1;
         end if;

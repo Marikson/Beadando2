@@ -15,6 +15,7 @@ Protected body Safe_Random is
         RndNum: Integer;
     begin 
         RndNum:= randInteger.random(IntegerGenerator);
+        Printer.Put_Line("Veletlenszam a Szuroprobahoz legeneralva!");
         return RndNum;
     end GetRandStudent;
 
@@ -22,6 +23,7 @@ Protected body Safe_Random is
         Rnd: Duration;
     begin
         Rnd:= Duration(randFloat.random(FloatGenerator));
+        Printer.Put_Line("Veletlenszam hogy meddig maradjon bent a diak legeneralva!");
         return Rnd * (Max-Min) + Min;
     end GetDuration;
 

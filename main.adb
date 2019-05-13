@@ -6,9 +6,9 @@ use Ada.Calendar;
 
 procedure main is 
 
-    Students: constant Integer:= 100;
+    StudentsCount: constant Integer:= 5;
     LessonLength: constant Duration:= 15.0;
-    LessonEnd: constant Time:= clock+LessonLength;
+    LessonEnd: constant Time := Clock + LessonLength;
     subtype Nametype is String (1..4);
     subtype Percent is Integer Range 1..100;
 
@@ -19,21 +19,13 @@ procedure main is
         Name: Nametype:= "----";
         Loc: Location:= Home;
     end record;
-    type Attendance_Sheet is array(1..Students) of NameLoc;
+    type Attendance_Sheet is array(1..StudentsCount) of NameLoc;
     type StudentPtr is access NameLoc;
-
-    --captcha teszthez
-    procedure Put_Line(C: Captcha) is 
-    begin 
-        for I in Captcha'Range loop
-            Ada.Text_IO.Put(C(I));
-        end loop;
-        Ada.Text_IO.New_Line;
-    end Put_Line;
 
     --Printer
     Protected Printer is  
         procedure Put_Line(S: String);
+        function ToString(C: Captcha) return String;
     end Printer;
 
     --Generator
@@ -76,7 +68,7 @@ procedure main is
     end Classroom;
 
     --Hallgato 
-    task type Student(S: StudentPtr);
+    task type Student(S: access NameLoc);
 
     --Random generator
     package randInteger is new Ada.Numerics.Discrete_Random(Integer); 
@@ -97,8 +89,6 @@ procedure main is
         FloatGenerator: randFloat.Generator;
     end Safe_Random;
 
-    
-
     Protected body Printer is separate;
     Protected body Captcha_Generator is separate;
     Task body Catalog is separate;
@@ -108,7 +98,21 @@ procedure main is
     Protected body Safe_Random is separate;
 
 
+    Nevjegyzek: Array (1..5) of aliased NameLoc := (
+        1 => ( Name => "ADAM", Loc => Lecture ),
+        2 => ( Name => "BELL", Loc => Home ),
+        3 => ( Name => "CHAN", Loc => Lecture ),
+        4 => ( Name => "DANI", Loc => Home ),
+        5 => ( Name => "ELEN", Loc => Lecture )
+    );
+    Hallgatok: array(1..StudentsCount) of access Student;
+    index: Integer;
+
 begin
     Safe_Random.Reset;
+    for I in Hallgatok'Range loop
+        --index := I mod (Nevjegyzek'Last - Nevjegyzek'First + 1) + Nevjegyzek'First;
+        Hallgatok(I) := new Student( Nevjegyzek(I)'access );
+    end loop;
 
 end main;

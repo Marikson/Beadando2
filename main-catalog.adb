@@ -18,6 +18,7 @@ begin
             Succesful:= Kapcsa = C; 
             if Succesful then 
                 Classroom.Add(N, L);
+                Printer.Put_Line("( " & N & " )" & " sikeresen felkerult a jelenleti listara!");
             end if;
             end Join;
         or
