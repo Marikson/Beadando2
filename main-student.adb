@@ -36,5 +36,7 @@ begin
                 exit;
         end select;
     end loop;
+    Printer.Put_Line("Sikertelen probalkozas!");
+    
 
 end Student;

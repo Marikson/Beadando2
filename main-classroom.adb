@@ -12,18 +12,12 @@ Protected body Classroom is
     end Add;
 
     procedure Leave(N: Nametype) is
-        --task type Door_Slam;
-
-        --task body Door_Slam is
-        --begin
-            --entry E do
-            --Teacher.Student_Left;
-        --end Door_Slam;   
+        DS: access Door_Slam;   
     begin 
         for I in Attendees'Range loop
             if Attendees(I).Name = N and Attendees(I).Loc = Lecture then 
                 Attendees(I).Loc:= Home;
-                --Door_Slam.E;
+                DS := new Door_Slam;
             end if;
         end loop;
     end Leave;

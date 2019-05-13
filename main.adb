@@ -37,8 +37,6 @@ procedure main is
     end Printer;
 
     --Generator
-    
-
     Protected Captcha_Generator is 
         procedure Create;
         function Get return Captcha;
@@ -53,7 +51,20 @@ procedure main is
         Entry Join(N: Nametype; L: Location; C: Captcha; Succesful: out Boolean);
     end Catalog;
 
+    --Tanar
+    Task Teacher is 
+       Entry Student_Left;
+    end Teacher;
+
     --Tanterem
+        task type Door_Slam is 
+        end Door_Slam;
+
+        task body Door_Slam is
+        begin
+            Teacher.Student_Left;
+        end Door_Slam;
+
     Protected Classroom is 
         procedure Add(N: Nametype; L: Location);
         procedure Leave(N: Nametype);
@@ -66,11 +77,6 @@ procedure main is
 
     --Hallgato 
     task type Student(S: StudentPtr);
-
-    --Tanar
-    Task Teacher is 
-       Entry Student_Left;
-    end Teacher;
 
     --Random generator
     package randInteger is new Ada.Numerics.Discrete_Random(Integer); 
@@ -104,4 +110,5 @@ procedure main is
 
 begin
     Safe_Random.Reset;
+
 end main;
