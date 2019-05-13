@@ -106,12 +106,12 @@ procedure main is
         5 => ( Name => "ELEN", Loc => Lecture )
     );
     Hallgatok: array(1..StudentsCount) of access Student;
-    index: Integer;
+    -- index: Integer;
 
 begin
     Safe_Random.Reset;
     for I in Hallgatok'Range loop
-        --index := I mod (Nevjegyzek'Last - Nevjegyzek'First + 1) + Nevjegyzek'First;
+        -- index := I mod (Nevjegyzek'Last - Nevjegyzek'First + 1) + Nevjegyzek'First;
         Hallgatok(I) := new Student( Nevjegyzek(I)'access );
     end loop;
 

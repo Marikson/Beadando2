@@ -14,6 +14,7 @@ Protected body Safe_Random is
     function GetRandStudent return Integer is
         RndNum: Integer;
     begin 
+        Printer.Put_Line("GetRandStudent!");
         RndNum:= randInteger.random(IntegerGenerator);
         Printer.Put_Line("Veletlenszam a Szuroprobahoz legeneralva!");
         return RndNum;
